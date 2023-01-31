@@ -20,6 +20,7 @@
 		38C614A729898583004FD7A3 /* RouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C614A629898583004FD7A3 /* RouterProtocol.swift */; };
 		38C614A929898593004FD7A3 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C614A829898593004FD7A3 /* Router.swift */; };
 		38C614AC29898812004FD7A3 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C614AB29898812004FD7A3 /* News.swift */; };
+		38C614AF2989888C004FD7A3 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C614AE2989888C004FD7A3 /* Parser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		38C614A629898583004FD7A3 /* RouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterProtocol.swift; sourceTree = "<group>"; };
 		38C614A829898593004FD7A3 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		38C614AB29898812004FD7A3 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
+		38C614AE2989888C004FD7A3 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 			children = (
 				38C614A0298984C9004FD7A3 /* Router */,
 				38C614A1298984D4004FD7A3 /* AssemblyBuilder */,
+				38C614AD29898870004FD7A3 /* Parser */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -158,6 +161,14 @@
 				38C614AB29898812004FD7A3 /* News.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		38C614AD29898870004FD7A3 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				38C614AE2989888C004FD7A3 /* Parser.swift */,
+			);
+			path = Parser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +249,7 @@
 				38C6149B2989821A004FD7A3 /* MainViewProtocol.swift in Sources */,
 				38C614AC29898812004FD7A3 /* News.swift in Sources */,
 				38C6147D29895EBD004FD7A3 /* SceneDelegate.swift in Sources */,
+				38C614AF2989888C004FD7A3 /* Parser.swift in Sources */,
 				38C61497298981A1004FD7A3 /* MainPresenter.swift in Sources */,
 				38C614A329898535004FD7A3 /* AssemblyBuilderProtocol.swift in Sources */,
 				38C614A529898559004FD7A3 /* AssemblyBuilder.swift in Sources */,
