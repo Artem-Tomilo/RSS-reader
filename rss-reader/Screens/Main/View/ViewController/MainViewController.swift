@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class MainViewController: UIViewController {
     
@@ -47,20 +48,18 @@ class MainViewController: UIViewController {
         
         guard let collectionView else { return }
         view.addSubview(collectionView)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .white
         
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "123")
+        collectionView.register(NewsCell.self,
+                                forCellWithReuseIdentifier: NewsCell.cellIdintifier)
     }
 }
 
@@ -79,8 +78,8 @@ extension MainViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "123", for: indexPath)
-        cell.backgroundColor = .white
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCell.cellIdintifier,
+                                                            for: indexPath) as? NewsCell else { return UICollectionViewCell() }
         return cell
     }
 }

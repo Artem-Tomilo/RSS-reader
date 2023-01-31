@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0683DEBC1D9FBC199A572A75 /* Pods_rss_reader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB0A9019951D5D2DF056244D /* Pods_rss_reader.framework */; };
 		38C6147B29895EBD004FD7A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C6147A29895EBD004FD7A3 /* AppDelegate.swift */; };
 		38C6147D29895EBD004FD7A3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C6147C29895EBD004FD7A3 /* SceneDelegate.swift */; };
 		38C6148429895EBF004FD7A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38C6148329895EBF004FD7A3 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 		38C614A929898593004FD7A3 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C614A829898593004FD7A3 /* Router.swift */; };
 		38C614AC29898812004FD7A3 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C614AB29898812004FD7A3 /* News.swift */; };
 		38C614AF2989888C004FD7A3 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C614AE2989888C004FD7A3 /* Parser.swift */; };
+		38C614B229899300004FD7A3 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C614B1298992FF004FD7A3 /* NewsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,10 @@
 		38C614A829898593004FD7A3 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		38C614AB29898812004FD7A3 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		38C614AE2989888C004FD7A3 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		38C614B1298992FF004FD7A3 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
+		5E5602388346E355BFDD9B25 /* Pods-rss-reader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rss-reader.debug.xcconfig"; path = "Target Support Files/Pods-rss-reader/Pods-rss-reader.debug.xcconfig"; sourceTree = "<group>"; };
+		66B44C82F9B59174E5EF1C6B /* Pods-rss-reader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rss-reader.release.xcconfig"; path = "Target Support Files/Pods-rss-reader/Pods-rss-reader.release.xcconfig"; sourceTree = "<group>"; };
+		DB0A9019951D5D2DF056244D /* Pods_rss_reader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_rss_reader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0683DEBC1D9FBC199A572A75 /* Pods_rss_reader.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +65,8 @@
 			children = (
 				38C6147929895EBD004FD7A3 /* rss-reader */,
 				38C6147829895EBD004FD7A3 /* Products */,
+				A7FDF9DBF41D8A0EC2110DC4 /* Pods */,
+				A05B89469CB74719763B0E8B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,8 +109,8 @@
 		38C6149429898174004FD7A3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				38C6149C29898236004FD7A3 /* MainViewController.swift */,
-				38C6149A2989821A004FD7A3 /* MainViewProtocol.swift */,
+				38C614B0298992E1004FD7A3 /* ViewController */,
+				38C614B1298992FF004FD7A3 /* NewsCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -171,6 +180,33 @@
 			path = Parser;
 			sourceTree = "<group>";
 		};
+		38C614B0298992E1004FD7A3 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				38C6149C29898236004FD7A3 /* MainViewController.swift */,
+				38C6149A2989821A004FD7A3 /* MainViewProtocol.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		A05B89469CB74719763B0E8B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DB0A9019951D5D2DF056244D /* Pods_rss_reader.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A7FDF9DBF41D8A0EC2110DC4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5E5602388346E355BFDD9B25 /* Pods-rss-reader.debug.xcconfig */,
+				66B44C82F9B59174E5EF1C6B /* Pods-rss-reader.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -178,9 +214,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 38C6148B29895EBF004FD7A3 /* Build configuration list for PBXNativeTarget "rss-reader" */;
 			buildPhases = (
+				B3D6311353B084F24E408ADC /* [CP] Check Pods Manifest.lock */,
 				38C6147329895EBD004FD7A3 /* Sources */,
 				38C6147429895EBD004FD7A3 /* Frameworks */,
 				38C6147529895EBD004FD7A3 /* Resources */,
+				451CBC38B67CA4A6136A1D86 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -236,6 +274,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		451CBC38B67CA4A6136A1D86 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-rss-reader/Pods-rss-reader-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-rss-reader/Pods-rss-reader-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-rss-reader/Pods-rss-reader-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B3D6311353B084F24E408ADC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-rss-reader-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		38C6147329895EBD004FD7A3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -252,6 +332,7 @@
 				38C614AF2989888C004FD7A3 /* Parser.swift in Sources */,
 				38C61497298981A1004FD7A3 /* MainPresenter.swift in Sources */,
 				38C614A329898535004FD7A3 /* AssemblyBuilderProtocol.swift in Sources */,
+				38C614B229899300004FD7A3 /* NewsCell.swift in Sources */,
 				38C614A529898559004FD7A3 /* AssemblyBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,6 +467,7 @@
 		};
 		38C6148C29895EBF004FD7A3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E5602388346E355BFDD9B25 /* Pods-rss-reader.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -413,6 +495,7 @@
 		};
 		38C6148D29895EBF004FD7A3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66B44C82F9B59174E5EF1C6B /* Pods-rss-reader.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
