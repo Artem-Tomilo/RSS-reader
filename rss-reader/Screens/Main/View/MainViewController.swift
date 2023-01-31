@@ -16,3 +16,7 @@ class MainViewController: UIViewController {
         
     }
 }
+
+extension MainViewController: MainViewProtocol {
+    
+}

@@ -10,9 +10,11 @@ import Foundation
 class MainPresenter: MainPresenterProtocol {
     
     private weak var view: MainViewProtocol?
+    private let router: RouterProtocol
     
-    required init(view: MainViewProtocol) {
+    required init(view: MainViewProtocol, router: RouterProtocol) {
         self.view = view
+        self.router = router
     }
     
     
