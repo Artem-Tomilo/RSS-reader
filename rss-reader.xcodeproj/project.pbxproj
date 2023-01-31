@@ -203,7 +203,6 @@
 				5E5602388346E355BFDD9B25 /* Pods-rss-reader.debug.xcconfig */,
 				66B44C82F9B59174E5EF1C6B /* Pods-rss-reader.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

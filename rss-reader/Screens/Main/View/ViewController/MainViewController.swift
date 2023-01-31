@@ -74,16 +74,25 @@ extension MainViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return presenter?.news.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCell.cellIdintifier,
                                                             for: indexPath) as? NewsCell else { return UICollectionViewCell() }
+        let news = presenter?.news[indexPath.item]
+        guard let news else { return cell }
+        cell.bind(title: news.title, date: news.date, image: nil)
         return cell
     }
 }
 
 extension MainViewController: MainViewProtocol {
     
+    func fetchNewsSuccess() {
+        self.collectionView?.reloadData()
+    }
+    func fetchNewsFailure(error: Error) {
+        
+    }
 }

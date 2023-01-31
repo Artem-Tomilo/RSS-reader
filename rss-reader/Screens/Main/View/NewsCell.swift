@@ -45,9 +45,10 @@ class NewsCell: UICollectionViewCell {
         }
         
         logo.snp.makeConstraints { make in
-            make.top.trailing.bottom.equalToSuperview().inset(5)
+            make.top.trailing.bottom.equalToSuperview().inset(15)
             make.width.equalTo(logo.snp.height)
         }
+        logo.backgroundColor = .cyan
     }
     
     private func configureSubViews() {
