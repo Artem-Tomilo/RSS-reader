@@ -11,23 +11,25 @@ class MainPresenter: MainPresenterProtocol {
     
     private weak var view: MainViewProtocol?
     private let router: RouterProtocol
+    private let networkService: NetworkServiceProtocol
     var news = [News]()
     
-    required init(view: MainViewProtocol, router: RouterProtocol) {
+    required init(view: MainViewProtocol, router: RouterProtocol, networkService: NetworkServiceProtocol) {
         self.view = view
         self.router = router
+        self.networkService = networkService
         fetchNews()
     }
     
     func fetchNews() {
-        let parser = Parser()
-        parser.parseFeed(url: "https://lenta.ru/rss/") { [weak self] news in
-            guard let self else { return }
-            self.news = news
-            DispatchQueue.main.async {
+        networkService.fetchNews { result in
+            switch result {
+            case .success(let news):
+                self.news = news
                 self.view?.fetchNewsSuccess()
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
-    
 }

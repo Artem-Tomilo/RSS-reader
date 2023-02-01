@@ -11,7 +11,8 @@ class AssemblyBuilder: AssemblyBuilderProtocol {
     
     func createMainViewController(router: RouterProtocol) -> UIViewController {
         let view = MainViewController()
-        let presenter = MainPresenter(view: view, router: router)
+        let networkService = NetworkService()
+        let presenter = MainPresenter(view: view, router: router, networkService: networkService)
         view.presenter = presenter
         return view
     }

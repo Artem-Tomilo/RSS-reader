@@ -23,6 +23,8 @@
 		38C614AC29898812004FD7A3 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C614AB29898812004FD7A3 /* News.swift */; };
 		38C614AF2989888C004FD7A3 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C614AE2989888C004FD7A3 /* Parser.swift */; };
 		38C614B229899300004FD7A3 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C614B1298992FF004FD7A3 /* NewsCell.swift */; };
+		38C614BD298A6121004FD7A3 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C614BC298A6121004FD7A3 /* NetworkService.swift */; };
+		38C614BF298A612E004FD7A3 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C614BE298A612E004FD7A3 /* NetworkServiceProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,8 @@
 		38C614AB29898812004FD7A3 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		38C614AE2989888C004FD7A3 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		38C614B1298992FF004FD7A3 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
+		38C614BC298A6121004FD7A3 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		38C614BE298A612E004FD7A3 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
 		5E5602388346E355BFDD9B25 /* Pods-rss-reader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rss-reader.debug.xcconfig"; path = "Target Support Files/Pods-rss-reader/Pods-rss-reader.debug.xcconfig"; sourceTree = "<group>"; };
 		66B44C82F9B59174E5EF1C6B /* Pods-rss-reader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rss-reader.release.xcconfig"; path = "Target Support Files/Pods-rss-reader/Pods-rss-reader.release.xcconfig"; sourceTree = "<group>"; };
 		DB0A9019951D5D2DF056244D /* Pods_rss_reader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_rss_reader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +146,7 @@
 				38C614A0298984C9004FD7A3 /* Router */,
 				38C614A1298984D4004FD7A3 /* AssemblyBuilder */,
 				38C614AD29898870004FD7A3 /* Parser */,
+				38C614BB298A610D004FD7A3 /* Networking */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -187,6 +192,15 @@
 				38C6149A2989821A004FD7A3 /* MainViewProtocol.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		38C614BB298A610D004FD7A3 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				38C614BC298A6121004FD7A3 /* NetworkService.swift */,
+				38C614BE298A612E004FD7A3 /* NetworkServiceProtocol.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		A05B89469CB74719763B0E8B /* Frameworks */ = {
@@ -324,12 +338,14 @@
 				38C6149D29898236004FD7A3 /* MainViewController.swift in Sources */,
 				38C614A929898593004FD7A3 /* Router.swift in Sources */,
 				38C6149929898205004FD7A3 /* MainPresenterProtocol.swift in Sources */,
+				38C614BD298A6121004FD7A3 /* NetworkService.swift in Sources */,
 				38C6147B29895EBD004FD7A3 /* AppDelegate.swift in Sources */,
 				38C6149B2989821A004FD7A3 /* MainViewProtocol.swift in Sources */,
 				38C614AC29898812004FD7A3 /* News.swift in Sources */,
 				38C6147D29895EBD004FD7A3 /* SceneDelegate.swift in Sources */,
 				38C614AF2989888C004FD7A3 /* Parser.swift in Sources */,
 				38C61497298981A1004FD7A3 /* MainPresenter.swift in Sources */,
+				38C614BF298A612E004FD7A3 /* NetworkServiceProtocol.swift in Sources */,
 				38C614A329898535004FD7A3 /* AssemblyBuilderProtocol.swift in Sources */,
 				38C614B229899300004FD7A3 /* NewsCell.swift in Sources */,
 				38C614A529898559004FD7A3 /* AssemblyBuilder.swift in Sources */,

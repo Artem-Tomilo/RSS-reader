@@ -82,20 +82,7 @@ extension MainViewController: UICollectionViewDataSource {
                                                             for: indexPath) as? NewsCell else { return UICollectionViewCell() }
         let news = presenter?.news[indexPath.item]
         guard let news else { return cell }
-        
-        let url = URL(string: news.logo!)
-        let request = URLRequest(url: url!)
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error {
-                print(error.localizedDescription)
-            }
-            guard let data else { return }
-            DispatchQueue.main.async {
-                cell.bind(title: news.title, date: news.date, image: UIImage(data: data))
-            }
-        }
-        task.resume()
-        
+        cell.bind(news: news)
         return cell
     }
 }

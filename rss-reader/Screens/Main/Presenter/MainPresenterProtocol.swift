@@ -8,6 +8,6 @@
 import Foundation
 
 protocol MainPresenterProtocol: AnyObject {
-    init(view: MainViewProtocol, router: RouterProtocol)
+    init(view: MainViewProtocol, router: RouterProtocol, networkService: NetworkServiceProtocol)
     var news: [News] { get }
 }

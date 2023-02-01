@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class NewsCell: UICollectionViewCell {
     
@@ -65,11 +66,12 @@ class NewsCell: UICollectionViewCell {
         dateLabel.alpha = 0.7
     }
     
-    func bind(title: String, date: String, image: UIImage?) {
-        titleLabel.text = title
-        dateLabel.text = date
-        if let image {
-            self.logo.image = image
+    func bind(news: News) {
+        titleLabel.text = news.title
+        dateLabel.text = news.date
+        
+        if let path = news.logo {
+            logo.sd_setImage(with: URL(string: path))
         }
     }
 }

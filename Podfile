@@ -8,4 +8,5 @@ target 'rss-reader' do
   # Pods for rss-reader
 pod "SnapKit"
 pod 'Alamofire'
+pod 'SDWebImage'
 end
