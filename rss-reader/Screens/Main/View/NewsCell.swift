@@ -58,13 +58,14 @@ class NewsCell: UICollectionViewCell {
         titleLabel.numberOfLines = 0
         titleLabel.textColor = .black
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        logo.layer.cornerRadius = 5
-        logo.clipsToBounds = true
         
         dateLabel.backgroundColor = .white
         dateLabel.textColor = .black
         dateLabel.font = UIFont.systemFont(ofSize: 13)
         dateLabel.alpha = 0.7
+        
+        logo.layer.cornerRadius = 5
+        logo.clipsToBounds = true
         
         activityIndicator.displayIndicator(view: logo)
         activityIndicator.startAnimating()
@@ -72,12 +73,13 @@ class NewsCell: UICollectionViewCell {
     
     func bind(news: News) {
         titleLabel.text = news.title
-        dateLabel.text = news.date
+        let dateFormatter = DateFormatter()
+        let stringDate = news.date.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        dateLabel.text = dateFormatter.getNewDate(string: stringDate)
+        
         
         if let path = news.logo {
-            logo.sd_setImage(with: URL(string: path),
-                             placeholderImage: nil,
-                             options: .continueInBackground) { (image, error, cache, url) in
+            logo.sd_setImage(with: URL(string: path)) { (image, error, cache, url) in
                 self.activityIndicator.stopAnimating()
             }
         }
