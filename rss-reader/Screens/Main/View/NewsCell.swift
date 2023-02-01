@@ -35,7 +35,7 @@ class NewsCell: UICollectionViewCell {
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(15)
             make.top.equalToSuperview().offset(5)
-            make.trailing.equalTo(logo.snp.leading).offset(-5)
+            make.trailing.equalTo(logo.snp.leading).offset(-15)
             make.height.equalToSuperview().multipliedBy(0.7)
         }
         
@@ -72,11 +72,9 @@ class NewsCell: UICollectionViewCell {
     }
     
     func bind(news: News) {
-        titleLabel.text = news.title
         let dateFormatter = DateFormatter()
-        let stringDate = news.date.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        dateLabel.text = dateFormatter.getNewDate(string: stringDate)
-        
+        titleLabel.text = news.title
+        dateLabel.text = dateFormatter.getNewDate(string: news.date)
         
         if let path = news.logo {
             logo.sd_setImage(with: URL(string: path)) { (image, error, cache, url) in

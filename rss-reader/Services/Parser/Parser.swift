@@ -38,7 +38,7 @@ extension Parser: XMLParserDelegate {
             currentImageURL = ""
         case "enclosure":
             if let urlString = attributeDict["url"] {
-                currentImageURL += urlString
+                currentImageURL += urlString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             }
         default:
             break
@@ -48,11 +48,11 @@ extension Parser: XMLParserDelegate {
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         switch currentNews {
         case "title":
-            currentTitle += string
+            currentTitle += string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         case "description":
-            currentDescription += string
+            currentDescription += string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         case "pubDate":
-            currentPubDate += string
+            currentPubDate += string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         default:
             break
         }

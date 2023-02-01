@@ -10,15 +10,23 @@ import SnapKit
 
 class MainViewController: UIViewController {
     
+    //MARK: - Properties
+    
     var presenter: MainPresenterProtocol?
     private var collectionView: UICollectionView?
     private let activityIndicator = ActivityIndicator()
+    private let refreshControl = UIRefreshControl()
+    
+    //MARK: - VC Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
         configureCollectionView()
+        configureSubViews()
     }
+    
+    //MARK: - View settings
     
     private func configureNavigationBar(){
         navigationController?.navigationBar.barStyle = .black
@@ -36,15 +44,12 @@ class MainViewController: UIViewController {
     private func configureCollectionView() {
         view.backgroundColor = .white
         
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .absolute(100))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        
+        let itemsPerRow: CGFloat = 1
+        let paddingWidth = itemsPerRow + 1
+        let availableWidth = UIScreen.main.bounds.width - paddingWidth
+        let widthPerItem = availableWidth / itemsPerRow
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: widthPerItem, height: 100)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         guard let collectionView else { return }
@@ -61,11 +66,30 @@ class MainViewController: UIViewController {
         
         collectionView.register(NewsCell.self,
                                 forCellWithReuseIdentifier: NewsCell.cellIdintifier)
+    }
+    
+    private func configureSubViews() {
+        guard let collectionView else { return }
+        refreshControl.addTarget(self, action: #selector(update(_:)), for: .primaryActionTriggered)
+        collectionView.refreshControl = refreshControl
+        
+        let updateButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(update(_:)))
+        updateButton.tintColor = .white
+        navigationItem.rightBarButtonItem = updateButton
         
         activityIndicator.displayIndicator(view: collectionView)
         activityIndicator.startAnimating()
     }
+    
+    //MARK: - Targets
+    
+    @objc func update(_ sender: Any) {
+        presenter?.fetchNews()
+        refreshControl.endRefreshing()
+    }
 }
+
+//MARK: - extension CollectionView
 
 extension MainViewController: UICollectionViewDelegate {
     
@@ -91,12 +115,15 @@ extension MainViewController: UICollectionViewDataSource {
     }
 }
 
+//MARK: - extension MainViewProtocol
+
 extension MainViewController: MainViewProtocol {
     
     func fetchNewsSuccess() {
         self.activityIndicator.stopAnimating()
         self.collectionView?.reloadData()
     }
+    
     func fetchNewsFailure(error: Error) {
         
     }
