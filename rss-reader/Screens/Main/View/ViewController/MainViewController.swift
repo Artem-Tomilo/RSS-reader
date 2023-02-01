@@ -49,7 +49,8 @@ class MainViewController: UIViewController {
         let availableWidth = UIScreen.main.bounds.width - paddingWidth
         let widthPerItem = availableWidth / itemsPerRow
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: widthPerItem, height: 100)
+        layout.minimumLineSpacing = 10
+        layout.itemSize = CGSize(width: widthPerItem, height: 120)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         guard let collectionView else { return }

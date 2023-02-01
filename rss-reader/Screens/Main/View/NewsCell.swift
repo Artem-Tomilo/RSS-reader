@@ -11,6 +11,7 @@ import SDWebImage
 class NewsCell: UICollectionViewCell {
     
     private let titleLabel = UILabel()
+    private let titleView = UIView()
     private let dateLabel = UILabel()
     private let logo = UIImageView()
     private let activityIndicator = ActivityIndicator()
@@ -28,22 +29,26 @@ class NewsCell: UICollectionViewCell {
     
     private func addingSubviewsAndSettingConstraints() {
         contentView.backgroundColor = .white
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(dateLabel)
+        contentView.addSubview(titleView)
         contentView.addSubview(logo)
+        titleView.addSubview(titleLabel)
+        titleView.addSubview(dateLabel)
+        
+        titleView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(15)
+            make.trailing.equalTo(logo.snp.leading).offset(-15)
+            make.top.equalToSuperview().offset(5)
+            make.height.greaterThanOrEqualTo(100)
+        }
         
         titleLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(15)
-            make.top.equalToSuperview().offset(5)
-            make.trailing.equalTo(logo.snp.leading).offset(-15)
-            make.height.equalToSuperview().multipliedBy(0.7)
+            make.leading.top.trailing.equalToSuperview()
+            make.bottom.equalTo(dateLabel.snp.top)
         }
         
         dateLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(15)
-            make.top.equalTo(titleLabel.snp.bottom)
-            make.bottom.equalToSuperview().offset(-5)
-            make.width.equalTo(titleLabel.snp.width)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(30)
         }
         
         logo.snp.makeConstraints { make in
@@ -66,6 +71,7 @@ class NewsCell: UICollectionViewCell {
         
         logo.layer.cornerRadius = 5
         logo.clipsToBounds = true
+        logo.contentMode = .scaleAspectFill
         
         activityIndicator.displayIndicator(view: logo)
         activityIndicator.startAnimating()
