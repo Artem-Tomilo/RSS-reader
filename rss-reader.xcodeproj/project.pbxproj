@@ -25,6 +25,7 @@
 		38C614B229899300004FD7A3 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C614B1298992FF004FD7A3 /* NewsCell.swift */; };
 		38C614BD298A6121004FD7A3 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C614BC298A6121004FD7A3 /* NetworkService.swift */; };
 		38C614BF298A612E004FD7A3 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C614BE298A612E004FD7A3 /* NetworkServiceProtocol.swift */; };
+		38C614C2298A6B27004FD7A3 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C614C1298A6B27004FD7A3 /* ActivityIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		38C614B1298992FF004FD7A3 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		38C614BC298A6121004FD7A3 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		38C614BE298A612E004FD7A3 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
+		38C614C1298A6B27004FD7A3 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		5E5602388346E355BFDD9B25 /* Pods-rss-reader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rss-reader.debug.xcconfig"; path = "Target Support Files/Pods-rss-reader/Pods-rss-reader.debug.xcconfig"; sourceTree = "<group>"; };
 		66B44C82F9B59174E5EF1C6B /* Pods-rss-reader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rss-reader.release.xcconfig"; path = "Target Support Files/Pods-rss-reader/Pods-rss-reader.release.xcconfig"; sourceTree = "<group>"; };
 		DB0A9019951D5D2DF056244D /* Pods_rss_reader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_rss_reader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +89,7 @@
 			children = (
 				38C6149F298984B5004FD7A3 /* Services */,
 				38C6149229898152004FD7A3 /* Screens */,
+				38C614C0298A6B11004FD7A3 /* Views */,
 				38C6149E2989848E004FD7A3 /* res */,
 			);
 			path = "rss-reader";
@@ -201,6 +204,14 @@
 				38C614BE298A612E004FD7A3 /* NetworkServiceProtocol.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		38C614C0298A6B11004FD7A3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				38C614C1298A6B27004FD7A3 /* ActivityIndicator.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		A05B89469CB74719763B0E8B /* Frameworks */ = {
@@ -346,6 +357,7 @@
 				38C614AF2989888C004FD7A3 /* Parser.swift in Sources */,
 				38C61497298981A1004FD7A3 /* MainPresenter.swift in Sources */,
 				38C614BF298A612E004FD7A3 /* NetworkServiceProtocol.swift in Sources */,
+				38C614C2298A6B27004FD7A3 /* ActivityIndicator.swift in Sources */,
 				38C614A329898535004FD7A3 /* AssemblyBuilderProtocol.swift in Sources */,
 				38C614B229899300004FD7A3 /* NewsCell.swift in Sources */,
 				38C614A529898559004FD7A3 /* AssemblyBuilder.swift in Sources */,

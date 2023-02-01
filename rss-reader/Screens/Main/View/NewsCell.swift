@@ -13,6 +13,7 @@ class NewsCell: UICollectionViewCell {
     private let titleLabel = UILabel()
     private let dateLabel = UILabel()
     private let logo = UIImageView()
+    private let activityIndicator = ActivityIndicator()
     static let cellIdintifier = "newsCell"
     
     override init(frame: CGRect) {
@@ -64,6 +65,9 @@ class NewsCell: UICollectionViewCell {
         dateLabel.textColor = .black
         dateLabel.font = UIFont.systemFont(ofSize: 13)
         dateLabel.alpha = 0.7
+        
+        activityIndicator.displayIndicator(view: logo)
+        activityIndicator.startAnimating()
     }
     
     func bind(news: News) {
@@ -71,7 +75,11 @@ class NewsCell: UICollectionViewCell {
         dateLabel.text = news.date
         
         if let path = news.logo {
-            logo.sd_setImage(with: URL(string: path))
+            logo.sd_setImage(with: URL(string: path),
+                             placeholderImage: nil,
+                             options: .continueInBackground) { (image, error, cache, url) in
+                self.activityIndicator.stopAnimating()
+            }
         }
     }
 }

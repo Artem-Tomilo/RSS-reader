@@ -12,6 +12,7 @@ class MainViewController: UIViewController {
     
     var presenter: MainPresenterProtocol?
     private var collectionView: UICollectionView?
+    private let activityIndicator = ActivityIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +61,9 @@ class MainViewController: UIViewController {
         
         collectionView.register(NewsCell.self,
                                 forCellWithReuseIdentifier: NewsCell.cellIdintifier)
+        
+        activityIndicator.displayIndicator(view: collectionView)
+        activityIndicator.startAnimating()
     }
 }
 
@@ -90,6 +94,7 @@ extension MainViewController: UICollectionViewDataSource {
 extension MainViewController: MainViewProtocol {
     
     func fetchNewsSuccess() {
+        self.activityIndicator.stopAnimating()
         self.collectionView?.reloadData()
     }
     func fetchNewsFailure(error: Error) {
