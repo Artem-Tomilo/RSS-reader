@@ -28,7 +28,7 @@ class MainViewController: UIViewController {
     
     //MARK: - View settings
     
-    private func configureNavigationBar(){
+    private func configureNavigationBar() {
         navigationController?.navigationBar.barStyle = .black
         let navBar = navigationController?.navigationBar
         navBar?.isTranslucent = false
