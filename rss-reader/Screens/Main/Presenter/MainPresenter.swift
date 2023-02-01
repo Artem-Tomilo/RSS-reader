@@ -21,7 +21,7 @@ class MainPresenter: MainPresenterProtocol {
     
     func fetchNews() {
         let parser = Parser()
-        parser.parseFeed(url: "https://lenta.ru/rss") { [weak self] news in
+        parser.parseFeed(url: "https://lenta.ru/rss/") { [weak self] news in
             guard let self else { return }
             self.news = news
             DispatchQueue.main.async {

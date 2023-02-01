@@ -45,17 +45,19 @@ class NewsCell: UICollectionViewCell {
         }
         
         logo.snp.makeConstraints { make in
-            make.top.trailing.bottom.equalToSuperview().inset(15)
-            make.width.equalTo(logo.snp.height)
+            make.trailing.equalToSuperview().offset(-15)
+            make.top.equalToSuperview().offset(5)
+            make.height.width.equalTo(70)
         }
-        logo.backgroundColor = .cyan
     }
     
     private func configureSubViews() {
         titleLabel.backgroundColor = .white
         titleLabel.numberOfLines = 0
         titleLabel.textColor = .black
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        logo.layer.cornerRadius = 5
+        logo.clipsToBounds = true
         
         dateLabel.backgroundColor = .white
         dateLabel.textColor = .black

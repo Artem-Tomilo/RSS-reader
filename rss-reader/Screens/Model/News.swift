@@ -11,5 +11,5 @@ struct News {
     var title: String
     var description: String
     var date: String
-    var logo: UIImage?
+    var logo: String?
 }

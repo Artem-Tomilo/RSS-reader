@@ -15,6 +15,7 @@ class Parser: NSObject, XMLParserDelegate {
     private var currentTitle: String = ""
     private var currentDescription: String = ""
     private var currentPubDate: String = ""
+    private var currentImageURL: String = ""
     
     private var parserCompletionHandler: (([News]) -> Void)?
     
@@ -41,12 +42,22 @@ class Parser: NSObject, XMLParserDelegate {
     
     // MARK: - XML Parser Delegate
     
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?,
+                qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         currentNews = elementName
-        if currentNews == "item" {
+        
+        switch elementName {
+        case "item":
             currentTitle = ""
             currentDescription = ""
             currentPubDate = ""
+            currentImageURL = ""
+        case "enclosure":
+            if let urlString = attributeDict["url"] {
+                currentImageURL += urlString
+            }
+        default:
+            break
         }
     }
     
@@ -65,7 +76,7 @@ class Parser: NSObject, XMLParserDelegate {
     
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "item" {
-            let news = News(title: currentTitle, description: currentDescription, date: currentPubDate)
+            let news = News(title: currentTitle, description: currentDescription, date: currentPubDate, logo: currentImageURL)
             self.news += [news]
         }
     }

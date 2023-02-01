@@ -9,5 +9,5 @@ import Foundation
 
 protocol MainPresenterProtocol: AnyObject {
     init(view: MainViewProtocol, router: RouterProtocol)
-    var news: [News] { get set }
+    var news: [News] { get }
 }
