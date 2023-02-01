@@ -93,6 +93,11 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UICollectionViewDelegate {
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let news = presenter?.news[indexPath.row]
+        guard let news else { return }
+        presenter?.newsTap(news: news)
+    }
 }
 
 extension MainViewController: UICollectionViewDataSource {

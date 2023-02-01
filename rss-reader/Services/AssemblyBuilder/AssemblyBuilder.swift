@@ -16,4 +16,11 @@ class AssemblyBuilder: AssemblyBuilderProtocol {
         view.presenter = presenter
         return view
     }
+    
+    func createNewsDetailsViewController(news: News, router: RouterProtocol) -> UIViewController {
+        let view = NewsDetailsViewController()
+        let presenter = NewsDetailsPresenter(view: view, router: router, news: news)
+        view.presenter = presenter
+        return view
+    }
 }

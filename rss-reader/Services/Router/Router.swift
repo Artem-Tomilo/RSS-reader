@@ -21,6 +21,11 @@ class Router: RouterProtocol {
         navigationController.viewControllers = [viewController]
     }
     
+    func moveToNewsDetails(news: News) {
+        guard let newsDetailsViewController = assemblyBuilder?.createNewsDetailsViewController(news: news, router: self) else { return }
+        navigationController.pushViewController(newsDetailsViewController, animated: true)
+    }
+    
     func popViewController() {
         navigationController.popViewController(animated: true)
     }

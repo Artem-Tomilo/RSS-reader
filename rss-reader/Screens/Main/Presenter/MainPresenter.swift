@@ -32,4 +32,8 @@ class MainPresenter: MainPresenterProtocol {
             }
         }
     }
+    
+    func newsTap(news: News) {
+        router.moveToNewsDetails(news: news)
+    }
 }
