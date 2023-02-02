@@ -18,4 +18,8 @@ class NewsDetailsPresenter: NewsDetailsPresenterProtocol {
         self.router = router
         self.news = news
     }
+    
+    func backButtonTap() {
+        router.popViewController()
+    }
 }

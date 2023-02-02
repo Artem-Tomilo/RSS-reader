@@ -1,23 +1,26 @@
 //
-//  TitleTableViewCell.swift
+//  NewsDetailsView.swift
 //  rss-reader
 //
-//  Created by Артем Томило on 1.02.23.
+//  Created by Артем Томило on 2.02.23.
 //
 
 import UIKit
 
-class TitleTableViewCell: UITableViewCell {
+class NewsDetailsView: UIView {
     
-    private let logo = UIImageView()
+    private let scrollView = UIScrollView()
+    private let stackView = UIStackView()
     private let titleView = UIView()
     private let titleLabel = UILabel()
     private let dateLabel = UILabel()
+    private let descriptionLabel = UILabel()
+    private let logo = UIImageView()
     private let activityIndicator = ActivityIndicator()
-    static let cellIdentifier = "newsDetails"
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupScrollView()
         addingSubviewsAndSettingConstraints()
         configureSubViews()
     }
@@ -26,14 +29,42 @@ class TitleTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func setupScrollView() {
+        addSubview(scrollView)
+        scrollView.addSubview(stackView)
+        
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        stackView.snp.makeConstraints { make in
+            make.edges.width.equalToSuperview()
+        }
+        
+        scrollView.bounces = false
+        scrollView.backgroundColor = .white
+        
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.spacing = 30
+    }
+    
     private func addingSubviewsAndSettingConstraints() {
-        contentView.addSubview(logo)
+        stackView.addArrangedSubview(logo)
+        stackView.addArrangedSubview(descriptionLabel)
         logo.addSubview(titleView)
+        
         titleView.addSubview(titleLabel)
         titleView.addSubview(dateLabel)
         
         logo.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(snp.height).multipliedBy(0.6)
+        }
+        
+        descriptionLabel.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(20)
         }
         
         titleView.snp.makeConstraints { make in
@@ -68,6 +99,11 @@ class TitleTableViewCell: UITableViewCell {
         dateLabel.font = UIFont.systemFont(ofSize: 13)
         dateLabel.alpha = 0.7
         
+        descriptionLabel.backgroundColor = .white
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.textColor = .black
+        descriptionLabel.font = UIFont.systemFont(ofSize: 22, weight: .light)
+        
         activityIndicator.displayIndicator(view: logo)
         activityIndicator.startAnimating()
     }
@@ -76,6 +112,7 @@ class TitleTableViewCell: UITableViewCell {
         let dateFormatter = DateFormatter()
         titleLabel.text = news.title
         dateLabel.text = dateFormatter.getNewDate(string: news.date)
+        descriptionLabel.text = news.description
         
         if let path = news.logo {
             logo.sd_setImage(with: URL(string: path)) { (image, error, cache, url) in

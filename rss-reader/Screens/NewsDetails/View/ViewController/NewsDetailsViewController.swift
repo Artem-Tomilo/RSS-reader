@@ -12,59 +12,55 @@ class NewsDetailsViewController: UIViewController {
     //MARK: - Properties
     
     var presenter: NewsDetailsPresenterProtocol?
-    private let tableView = UITableView()
+    private let newsView = NewsDetailsView()
     
     //MARK: - VC Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTableView()
+        configureNavigationBar()
+        configureNewsView()
     }
     
     //MARK: - View settings
     
-    private func configureTableView() {
-        navigationController?.navigationBar.tintColor = .white
-        view.backgroundColor = .white
-        view.addSubview(tableView)
+    private func configureNavigationBar() {
+        let leftTitle = UILabel()
+        leftTitle.font = UIFont.boldSystemFont(ofSize: 30)
+        leftTitle.text = "Details"
+        leftTitle.textColor = .white
         
-        tableView.snp.makeConstraints { make in
+        let backButton = UIButton(type: .custom)
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        backButton.tintColor = .white
+        let image = UIImageView(image: UIImage(named: "BackButton")?.withRenderingMode(.alwaysTemplate))
+        image.tintColor = .white
+        backButton.setImage(image.image, for: .normal)
+        backButton.addTarget(self, action: #selector(backButtonTapped(_:)), for: .primaryActionTriggered)
+        
+        let firstItem = UIBarButtonItem(customView: backButton)
+        let fixedSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.fixedSpace,
+                                                          target: nil, action: nil)
+        fixedSpace.width = 10.0
+        let secondItem = UIBarButtonItem(customView: leftTitle)
+        navigationItem.leftBarButtonItems = [firstItem, fixedSpace, secondItem]
+    }
+    
+    private func configureNewsView() {
+        view.backgroundColor = .white
+        view.addSubview(newsView)
+        newsView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        tableView.delegate = self
-        tableView.dataSource = self
         
-        tableView.register(TitleTableViewCell.self, forCellReuseIdentifier: TitleTableViewCell.cellIdentifier)
-        tableView.backgroundColor = .clear
-    }
-}
-
-//MARK: - Targets
-
-//MARK: - extension CollectionView
-
-extension NewsDetailsViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.frame.size.height * 0.6
-    }
-}
-
-extension NewsDetailsViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        guard let news = presenter?.news else { return }
+        newsView.bind(news)
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
+    //MARK: - Targets
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: TitleTableViewCell.cellIdentifier,
-                                                       for: indexPath) as? TitleTableViewCell else { return UITableViewCell() }
-        guard let news = presenter?.news else { return cell }
-        cell.bind(news)
-        return cell
+    @objc func backButtonTapped(_ sender: UIButton) {
+        presenter?.backButtonTap()
     }
 }
 

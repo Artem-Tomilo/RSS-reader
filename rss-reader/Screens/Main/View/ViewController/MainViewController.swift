@@ -32,7 +32,7 @@ class MainViewController: UIViewController {
         navigationController?.navigationBar.barStyle = .black
         let navBar = navigationController?.navigationBar
         navBar?.isTranslucent = false
-        navBar?.barTintColor = .red
+        navBar?.barTintColor = .black
         
         let leftTitle = UILabel()
         leftTitle.font = UIFont.boldSystemFont(ofSize: 30)
