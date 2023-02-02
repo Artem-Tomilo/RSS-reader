@@ -33,7 +33,16 @@ class MainPresenter: MainPresenterProtocol {
         }
     }
     
-    func newsTap(news: News) {
+    func isArticleViewed(in news: Set<News>, with id: Int) -> Bool {
+        for i in news {
+            if i.id == id {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func moveToNewsDetails(news: News) {
         router.moveToNewsDetails(news: news)
     }
 }

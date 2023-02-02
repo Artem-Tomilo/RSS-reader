@@ -17,6 +17,8 @@ class NewsCell: UICollectionViewCell {
     private let activityIndicator = ActivityIndicator()
     static let cellIdintifier = "newsCell"
     
+    private var news: News?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addingSubviewsAndSettingConstraints()
@@ -77,15 +79,24 @@ class NewsCell: UICollectionViewCell {
         activityIndicator.startAnimating()
     }
     
-    func bind(news: News) {
+    func bind(_ news: News) {
+        self.news = news
         let dateFormatter = DateFormatter()
         titleLabel.text = news.title
         dateLabel.text = dateFormatter.getNewDate(string: news.date)
         
-        if let path = news.logo {
+        if let path = news.pathForImage {
             logo.sd_setImage(with: URL(string: path)) { (image, error, cache, url) in
                 self.activityIndicator.stopAnimating()
             }
         }
+    }
+    
+    func unbind() -> News? {
+        return news
+    }
+    
+    func newsIsOpen() {
+        alpha = 0.2
     }
 }

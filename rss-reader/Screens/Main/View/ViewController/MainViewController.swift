@@ -16,6 +16,7 @@ class MainViewController: UIViewController {
     private var collectionView: UICollectionView?
     private let activityIndicator = ActivityIndicator()
     private let refreshControl = UIRefreshControl()
+    private var viewedNews: Set<News> = []
     
     //MARK: - VC Lifecycle
     
@@ -95,9 +96,14 @@ class MainViewController: UIViewController {
 extension MainViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let news = presenter?.news[indexPath.row]
-        guard let news else { return }
-        presenter?.newsTap(news: news)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? NewsCell else { return }
+        guard let news = presenter?.news[indexPath.row] else { return }
+        cell.newsIsOpen()
+        presenter?.moveToNewsDetails(news: news)
+        
+        guard var article = cell.unbind() else { return }
+        article.isSelected = true
+        viewedNews.insert(article)
     }
 }
 
@@ -114,9 +120,13 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCell.cellIdintifier,
                                                             for: indexPath) as? NewsCell else { return UICollectionViewCell() }
-        let news = presenter?.news[indexPath.item]
-        guard let news else { return cell }
-        cell.bind(news: news)
+        guard let presenter else { return cell }
+        let news = presenter.news[indexPath.item]
+        
+        if presenter.isArticleViewed(in: viewedNews, with: news.id) {
+            cell.newsIsOpen()
+        }
+        cell.bind(news)
         return cell
     }
 }

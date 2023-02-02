@@ -114,7 +114,7 @@ class NewsDetailsView: UIView {
         dateLabel.text = dateFormatter.getNewDate(string: news.date)
         descriptionLabel.text = news.description
         
-        if let path = news.logo {
+        if let path = news.pathForImage {
             logo.sd_setImage(with: URL(string: path)) { (image, error, cache, url) in
                 self.activityIndicator.stopAnimating()
             }

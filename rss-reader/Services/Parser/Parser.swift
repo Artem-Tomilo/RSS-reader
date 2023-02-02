@@ -60,7 +60,7 @@ extension Parser: XMLParserDelegate {
     
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "item" {
-            let news = News(title: currentTitle, description: currentDescription, date: currentPubDate, logo: currentImageURL)
+            let news = News(title: currentTitle, description: currentDescription, date: currentPubDate, pathForImage: currentImageURL)
             self.news += [news]
         }
     }

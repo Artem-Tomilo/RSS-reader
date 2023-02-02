@@ -11,5 +11,6 @@ protocol MainPresenterProtocol: AnyObject {
     init(view: MainViewProtocol, router: RouterProtocol, networkService: NetworkServiceProtocol)
     var news: [News] { get }
     func fetchNews()
-    func newsTap(news: News)
+    func moveToNewsDetails(news: News)
+    func isArticleViewed(in news: Set<News>, with id: Int) -> Bool
 }
