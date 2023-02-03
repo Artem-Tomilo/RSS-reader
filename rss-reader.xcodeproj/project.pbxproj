@@ -108,6 +108,7 @@
 				38C614AA29898797004FD7A3 /* Model */,
 				38C6149229898152004FD7A3 /* Screens */,
 				38C614C0298A6B11004FD7A3 /* Views */,
+				38C61503298D156D004FD7A3 /* CoreData */,
 				38C6149E2989848E004FD7A3 /* res */,
 			);
 			path = "rss-reader";
@@ -284,6 +285,13 @@
 				38C614DD298C7E86004FD7A3 /* extension+UIViewController.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		38C61503298D156D004FD7A3 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		A05B89469CB74719763B0E8B /* Frameworks */ = {
