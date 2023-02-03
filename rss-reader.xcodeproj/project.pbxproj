@@ -105,6 +105,7 @@
 			children = (
 				38C614DF298C865D004FD7A3 /* Extensions */,
 				38C6149F298984B5004FD7A3 /* Services */,
+				38C614AA29898797004FD7A3 /* Model */,
 				38C6149229898152004FD7A3 /* Screens */,
 				38C614C0298A6B11004FD7A3 /* Views */,
 				38C6149E2989848E004FD7A3 /* res */,
@@ -115,7 +116,6 @@
 		38C6149229898152004FD7A3 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				38C614AA29898797004FD7A3 /* Model */,
 				38C6149329898165004FD7A3 /* Main */,
 				38C614C5298AF989004FD7A3 /* NewsDetails */,
 			);

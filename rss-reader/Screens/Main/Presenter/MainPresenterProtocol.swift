@@ -12,5 +12,8 @@ protocol MainPresenterProtocol: AnyObject {
     var news: [News] { get }
     func fetchNews()
     func moveToNewsDetails(news: News)
-    func isArticleViewed(in news: Set<News>, with id: Int) -> Bool
+    func checkArticleViewed(with id: String) -> Bool
+    func saveViewedNews(_ news: [String])
+    func loadViewedNews() -> [String]
+    var viewedNews: [String] { get set }
 }

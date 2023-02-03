@@ -16,18 +16,15 @@ class MainViewController: UIViewController {
     private var collectionView: UICollectionView?
     private let activityIndicator = ActivityIndicator()
     private let refreshControl = UIRefreshControl()
-    private var viewedNews: Set<News> = []
     
     //MARK: - VC Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBar()
-        configureCollectionView()
-        configureSubViews()
+        configureUI()
     }
     
-    //MARK: - View settings
+    //MARK: - Configure UI
     
     private func configureNavigationBar() {
         navigationController?.navigationBar.barStyle = .black
@@ -83,6 +80,14 @@ class MainViewController: UIViewController {
         activityIndicator.startAnimating()
     }
     
+    private func configureUI() {
+        configureNavigationBar()
+        configureCollectionView()
+        configureSubViews()
+    }
+    
+    //MARK: - Handle error
+    
     private func handleError(error: Error) {
         let baseError = error as! BaseError
         showAlertController(message: baseError.message, viewController: self)
@@ -102,13 +107,15 @@ extension MainViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? NewsCell else { return }
-        guard let article = presenter?.news[indexPath.row] else { return }
+        guard let presenter else { return }
+        let article = presenter.news[indexPath.row]
         cell.newsIsOpen()
-        presenter?.moveToNewsDetails(news: article)
+        presenter.moveToNewsDetails(news: article)
         
-        guard var newsItem = cell.unbind() else { return }
-        newsItem.isSelected = true
-        viewedNews.insert(newsItem)
+        if !presenter.checkArticleViewed(with: article.id) {
+            presenter.viewedNews.append(article.id)
+            presenter.saveViewedNews(presenter.viewedNews)
+        }
     }
 }
 
@@ -128,8 +135,10 @@ extension MainViewController: UICollectionViewDataSource {
         guard let presenter else { return cell }
         let article = presenter.news[indexPath.item]
         
-        if presenter.isArticleViewed(in: viewedNews, with: article.id) {
-            cell.newsIsOpen()
+        if presenter.checkArticleViewed(with: article.id) {
+            DispatchQueue.main.async {
+                cell.newsIsOpen()
+            }
         }
         cell.bind(article)
         return cell

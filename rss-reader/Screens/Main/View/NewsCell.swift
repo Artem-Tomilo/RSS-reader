@@ -17,8 +17,6 @@ class NewsCell: UICollectionViewCell {
     private let activityIndicator = ActivityIndicator()
     static let cellIdintifier = "newsCell"
     
-    private var newsItem: News?
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addingSubviewsAndSettingConstraints()
@@ -80,7 +78,6 @@ class NewsCell: UICollectionViewCell {
     }
     
     func bind(_ news: News) {
-        self.newsItem = news
         let dateFormatter = DateFormatter()
         titleLabel.text = news.title
         dateLabel.text = dateFormatter.getNewDate(string: news.date)
@@ -90,10 +87,6 @@ class NewsCell: UICollectionViewCell {
                 self.activityIndicator.stopAnimating()
             }
         }
-    }
-    
-    func unbind() -> News? {
-        return newsItem
     }
     
     func newsIsOpen() {

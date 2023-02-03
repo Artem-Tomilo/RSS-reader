@@ -12,13 +12,17 @@ class MainPresenter: MainPresenterProtocol {
     private weak var view: MainViewProtocol?
     private let router: RouterProtocol
     private let networkService: NetworkServiceProtocol
+    private let userDefaults = UserDefaults.standard
     var news = [News]()
+    var viewedNews = [String]()
+    static let key = "viewedNewsKey"
     
     required init(view: MainViewProtocol, router: RouterProtocol, networkService: NetworkServiceProtocol) {
         self.view = view
         self.router = router
         self.networkService = networkService
         fetchNews()
+        self.viewedNews = loadViewedNews()
     }
     
     func fetchNews() {
@@ -33,16 +37,23 @@ class MainPresenter: MainPresenterProtocol {
         }
     }
     
-    func isArticleViewed(in news: Set<News>, with id: Int) -> Bool {
-        for i in news {
-            if i.id == id {
-                return true
-            }
+    func checkArticleViewed(with id: String) -> Bool {
+        if viewedNews.contains(id) {
+            return true
         }
         return false
     }
     
     func moveToNewsDetails(news: News) {
         router.moveToNewsDetails(news: news)
+    }
+    
+    func saveViewedNews(_ news: [String]) {
+        userDefaults.set(news, forKey: MainPresenter.key)
+    }
+    
+    func loadViewedNews() -> [String] {
+        let news = userDefaults.stringArray(forKey: MainPresenter.key)
+        return news ?? []
     }
 }

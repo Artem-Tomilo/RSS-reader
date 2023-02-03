@@ -12,16 +12,13 @@ struct News: Codable, Hashable {
     var description: String
     var date: String
     var pathForImage: String?
-    var id: Int
-    var isSelected: Bool = false
-    static var counter = 0
+    var id: String
     
-    init(title: String, description: String, date: String, pathForImage: String? = nil) {
+    init(title: String, description: String, date: String, pathForImage: String?) {
         self.title = title
         self.description = description
         self.date = date
         self.pathForImage = pathForImage
-        self.id = News.counter
-        News.counter += 1
+        self.id = (title.data(using: .utf8)?.base64EncodedString() ?? title) + (pathForImage?.data(using: .utf8)?.base64EncodedString() ?? "")
     }
 }
