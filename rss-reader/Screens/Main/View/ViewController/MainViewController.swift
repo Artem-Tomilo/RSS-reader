@@ -155,7 +155,8 @@ extension MainViewController: MainViewProtocol {
     }
     
     func fetchNewsFailure(error: Error) {
-        handleError(error: error)
         activityIndicator.stopAnimating()
+        handleError(error: error)
+        self.collectionView?.reloadData()
     }
 }

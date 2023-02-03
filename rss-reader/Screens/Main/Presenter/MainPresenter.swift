@@ -12,6 +12,7 @@ class MainPresenter: MainPresenterProtocol {
     private weak var view: MainViewProtocol?
     private let router: RouterProtocol
     private let networkService: NetworkServiceProtocol
+    private let dataManager = CoreDataManager()
     private let userDefaults = UserDefaults.standard
     var news = [News]()
     var viewedNews = [String]()
@@ -30,8 +31,12 @@ class MainPresenter: MainPresenterProtocol {
             switch result {
             case .success(let news):
                 self.news = news
+                DispatchQueue.global(qos: .background).async {
+                    self.news.forEach({self.dataManager.saveNews($0)})
+                }
                 self.view?.fetchNewsSuccess()
             case .failure(let error):
+                self.news = self.dataManager.loadNews()
                 self.view?.fetchNewsFailure(error: error)
             }
         }

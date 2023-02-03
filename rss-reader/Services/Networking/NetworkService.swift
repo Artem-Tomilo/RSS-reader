@@ -16,7 +16,7 @@ class NetworkService: NetworkServiceProtocol {
         AF.request(urlString).responseData { response in
             do {
                 if response.error != nil {
-                    completion(.failure(BaseError(message: "An unexpected error occurred. Try again")))
+                    completion(.failure(BaseError(message: "Failed to update data. Try again")))
                 }
                 let data = try response.result.get()
                 let parser = Parser()
