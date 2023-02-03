@@ -116,8 +116,12 @@ class NewsDetailsView: UIView {
         
         if let path = news.pathForImage {
             logo.sd_setImage(with: URL(string: path)) { (image, error, cache, url) in
-                self.activityIndicator.stopAnimating()
+                self.stopIndicator()
             }
         }
+    }
+    
+    func stopIndicator() {
+        activityIndicator.stopAnimating()
     }
 }

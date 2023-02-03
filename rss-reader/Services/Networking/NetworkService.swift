@@ -14,15 +14,19 @@ class NetworkService: NetworkServiceProtocol {
         let urlString = "https://lenta.ru/rss"
         
         AF.request(urlString).responseData { response in
-            if let error = response.error {
-                completion(.failure(error))
+            do {
+                if response.error != nil {
+                    completion(.failure(BaseError(message: "An unexpected error occurred. Try again")))
+                }
+                let data = try response.result.get()
+                let parser = Parser()
+                let xmlParser = XMLParser(data: data)
+                xmlParser.delegate = parser
+                xmlParser.parse()
+                completion(.success(parser.unbindNews()))
+            } catch {
+                completion(.failure(BaseError(message: "An unexpected error occurred. Try again")))
             }
-            guard let data = response.data else { return }
-            let parser = Parser()
-            let xmlParser = XMLParser(data: data)
-            xmlParser.delegate = parser
-            xmlParser.parse()
-            completion(.success(parser.unbindNews()))
         }
     }
 }

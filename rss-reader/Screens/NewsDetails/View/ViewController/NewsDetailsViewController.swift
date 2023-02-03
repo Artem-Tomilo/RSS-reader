@@ -53,8 +53,16 @@ class NewsDetailsViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        guard let news = presenter?.news else { return }
+        guard let news = presenter?.news else {
+            fetchArticleFailure(error: BaseError(message: "Failed to load news, please try again"))
+            return
+        }
         newsView.bind(news)
+    }
+    
+    private func handleError(error: Error) {
+        let baseError = error as! BaseError
+        showAlertController(message: baseError.message, viewController: self)
     }
     
     //MARK: - Targets
@@ -68,4 +76,12 @@ class NewsDetailsViewController: UIViewController {
 
 extension NewsDetailsViewController: NewsDetailsViewProtocol {
     
+    func fetchArticleSuccess() {
+        newsView.stopIndicator()
+    }
+    
+    func fetchArticleFailure(error: Error) {
+        newsView.stopIndicator()
+        handleError(error: error)
+    }
 }

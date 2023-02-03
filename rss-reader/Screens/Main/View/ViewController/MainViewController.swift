@@ -83,6 +83,11 @@ class MainViewController: UIViewController {
         activityIndicator.startAnimating()
     }
     
+    private func handleError(error: Error) {
+        let baseError = error as! BaseError
+        showAlertController(message: baseError.message, viewController: self)
+    }
+    
     //MARK: - Targets
     
     @objc func update(_ sender: Any) {
@@ -97,13 +102,13 @@ extension MainViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? NewsCell else { return }
-        guard let news = presenter?.news[indexPath.row] else { return }
+        guard let article = presenter?.news[indexPath.row] else { return }
         cell.newsIsOpen()
-        presenter?.moveToNewsDetails(news: news)
+        presenter?.moveToNewsDetails(news: article)
         
-        guard var article = cell.unbind() else { return }
-        article.isSelected = true
-        viewedNews.insert(article)
+        guard var newsItem = cell.unbind() else { return }
+        newsItem.isSelected = true
+        viewedNews.insert(newsItem)
     }
 }
 
@@ -121,12 +126,12 @@ extension MainViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCell.cellIdintifier,
                                                             for: indexPath) as? NewsCell else { return UICollectionViewCell() }
         guard let presenter else { return cell }
-        let news = presenter.news[indexPath.item]
+        let article = presenter.news[indexPath.item]
         
-        if presenter.isArticleViewed(in: viewedNews, with: news.id) {
+        if presenter.isArticleViewed(in: viewedNews, with: article.id) {
             cell.newsIsOpen()
         }
-        cell.bind(news)
+        cell.bind(article)
         return cell
     }
 }
@@ -141,6 +146,7 @@ extension MainViewController: MainViewProtocol {
     }
     
     func fetchNewsFailure(error: Error) {
-        
+        handleError(error: error)
+        activityIndicator.stopAnimating()
     }
 }

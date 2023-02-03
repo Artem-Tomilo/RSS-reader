@@ -28,7 +28,7 @@ class MainPresenter: MainPresenterProtocol {
                 self.news = news
                 self.view?.fetchNewsSuccess()
             case .failure(let error):
-                print(error.localizedDescription)
+                self.view?.fetchNewsFailure(error: error)
             }
         }
     }
