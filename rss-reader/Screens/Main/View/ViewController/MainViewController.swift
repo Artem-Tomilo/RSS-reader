@@ -124,7 +124,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
         
         switch indexPath.section {
         case 0:
-            return CGSize(width: widthPerItem, height: 80)
+            return CGSize(width: widthPerItem, height: 60)
         default:
             return CGSize(width: widthPerItem, height: 120)
         }
