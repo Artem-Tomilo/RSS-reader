@@ -31,7 +31,6 @@ class NewsSectionCell: UICollectionViewCell {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         guard let collectionView else { return }
         collectionView.backgroundColor = .clear
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
         
         contentView.addSubview(collectionView)
@@ -40,22 +39,30 @@ class NewsSectionCell: UICollectionViewCell {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        collectionView.register(NewCell.self, forCellWithReuseIdentifier: NewCell.cellIdetntifier)
+        collectionView.register(NewsSectionItemCell.self, forCellWithReuseIdentifier: NewsSectionItemCell.cellIdetntifier)
     }
 }
 
-extension NewsSectionCell: UICollectionViewDataSource, UICollectionViewDelegate {
+extension NewsSectionCell: UICollectionViewDataSource {
  
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return NewsSection.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewCell.cellIdetntifier, for: indexPath) as? NewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsSectionItemCell.cellIdetntifier,
+                                                            for: indexPath) as? NewsSectionItemCell else { return UICollectionViewCell() }
+        
+        let newsSectionItem = NewsSection.allCases[indexPath.item].title
+        cell.bind(newsSectionItem)
         return cell
     }
+}
+
+extension NewsSectionCell: UICollectionViewDelegate {
+    
 }

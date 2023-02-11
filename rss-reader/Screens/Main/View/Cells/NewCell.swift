@@ -7,10 +7,10 @@
 
 import UIKit
 
-class NewCell: UICollectionViewCell {
+class NewsSectionItemCell: UICollectionViewCell {
     
     private let label = UILabel()
-    static let cellIdetntifier = "newCell"
+    static let cellIdetntifier = "newsSectionItemCell"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
