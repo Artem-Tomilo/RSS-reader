@@ -42,13 +42,7 @@ class MainViewController: UIViewController {
     private func configureCollectionView() {
         view.backgroundColor = .white
         
-        let itemsPerRow: CGFloat = 1
-        let paddingWidth = itemsPerRow + 1
-        let availableWidth = UIScreen.main.bounds.width - paddingWidth
-        let widthPerItem = availableWidth / itemsPerRow
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 10
-        layout.itemSize = CGSize(width: widthPerItem, height: 120)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         guard let collectionView else { return }
@@ -64,7 +58,9 @@ class MainViewController: UIViewController {
         }
         
         collectionView.register(NewsCell.self,
-                                forCellWithReuseIdentifier: NewsCell.cellIdintifier)
+                                forCellWithReuseIdentifier: NewsCell.cellIdentifier)
+        collectionView.register(NewsSectionCell.self,
+                                forCellWithReuseIdentifier: NewsSectionCell.cellIdentifier)
     }
     
     private func configureSubViews() {
@@ -103,7 +99,7 @@ class MainViewController: UIViewController {
 
 //MARK: - extension CollectionView
 
-extension MainViewController: UICollectionViewDelegate {
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? NewsCell else { return }
@@ -117,31 +113,67 @@ extension MainViewController: UICollectionViewDelegate {
             presenter.saveViewedNews(presenter.viewedNews)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemsPerRow: CGFloat = 1
+        let paddingWidth = itemsPerRow + 1
+        let availableWidth = UIScreen.main.bounds.width - paddingWidth
+        let widthPerItem = availableWidth / itemsPerRow
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 10
+        
+        switch indexPath.section {
+        case 0:
+            return CGSize(width: widthPerItem, height: 80)
+        default:
+            return CGSize(width: widthPerItem, height: 120)
+        }
+    }
 }
 
 extension MainViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter?.news.count ?? 0
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return presenter?.news.count ?? 0
+        default:
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCell.cellIdintifier,
-                                                            for: indexPath) as? NewsCell else { return UICollectionViewCell() }
-        guard let presenter else { return cell }
-        let article = presenter.news[indexPath.item]
-        
-        if presenter.checkArticleViewed(with: article.id) {
-            DispatchQueue.main.async {
-                cell.newsIsOpen()
+        switch indexPath.section {
+        case 0:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsSectionCell.cellIdentifier,
+                                                                for: indexPath) as? NewsSectionCell else {
+                return UICollectionViewCell()
             }
+            return cell
+            
+        case 1:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCell.cellIdentifier,
+                                                                for: indexPath) as? NewsCell else { return UICollectionViewCell() }
+            guard let presenter else { return cell }
+            let article = presenter.news[indexPath.item]
+            
+            if presenter.checkArticleViewed(with: article.id) {
+                DispatchQueue.main.async {
+                    cell.newsIsOpen()
+                }
+            }
+            cell.bind(article)
+            return cell
+            
+        default:
+            return UICollectionViewCell()
         }
-        cell.bind(article)
-        return cell
     }
 }
 

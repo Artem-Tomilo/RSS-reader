@@ -15,7 +15,7 @@ class NewsCell: UICollectionViewCell {
     private let dateLabel = UILabel()
     private let logo = UIImageView()
     private let activityIndicator = ActivityIndicator()
-    static let cellIdintifier = "newsCell"
+    static let cellIdentifier = "newsCell"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
