@@ -10,6 +10,7 @@ import UIKit
 class NewsSectionCell: UICollectionViewCell {
     
     private var collectionView: UICollectionView?
+    weak var delegate: NewsSectionCellProtocol?
     static let cellIdentifier = "newsSectionCell"
     
     override init(frame: CGRect) {
@@ -44,7 +45,7 @@ class NewsSectionCell: UICollectionViewCell {
 }
 
 extension NewsSectionCell: UICollectionViewDataSource {
- 
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -64,5 +65,8 @@ extension NewsSectionCell: UICollectionViewDataSource {
 }
 
 extension NewsSectionCell: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let newsSection = NewsSection.allCases[indexPath.item]
+        delegate?.newsSectionTap(newsSection)
+    }
 }

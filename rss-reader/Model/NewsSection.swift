@@ -11,8 +11,8 @@ enum NewsSection: String, CaseIterable {
     case news
     case top7
     case last24
-    case articles
-    case columns
+    case russia = "news/russia"
+    case world = "news/world"
 }
 
 extension NewsSection {
@@ -24,10 +24,11 @@ extension NewsSection {
             return "Top 7"
         case .last24:
             return "Last 24"
-        case .articles:
-            return "Articles"
-        case .columns:
-            return "Columns"
+        case .russia:
+            return "Russia"
+        case .world:
+            return "World"
+            
         }
     }
 }

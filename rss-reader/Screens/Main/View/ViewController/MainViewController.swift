@@ -155,6 +155,7 @@ extension MainViewController: UICollectionViewDataSource {
                                                                 for: indexPath) as? NewsSectionCell else {
                 return UICollectionViewCell()
             }
+            cell.delegate = self
             return cell
             
         case 1:
@@ -190,5 +191,16 @@ extension MainViewController: MainViewProtocol {
         activityIndicator.stopAnimating()
         handleError(error: error)
         self.collectionView?.reloadData()
+    }
+    
+    func startIndicator() {
+        activityIndicator.displayIndicator(view: view)
+        activityIndicator.startAnimating()
+    }
+}
+
+extension MainViewController: NewsSectionCellProtocol {
+    func newsSectionTap(_ newsSection: NewsSection) {
+        presenter?.changeNewsSection(newsSection)
     }
 }

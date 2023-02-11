@@ -15,5 +15,6 @@ protocol MainPresenterProtocol: AnyObject {
     func checkArticleViewed(with id: String) -> Bool
     func saveViewedNews(_ news: [String])
     func loadViewedNews() -> [String]
+    func changeNewsSection(_ newsSection: NewsSection)
     var viewedNews: [String] { get set }
 }

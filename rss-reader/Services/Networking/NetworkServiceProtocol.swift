@@ -9,4 +9,5 @@ import Foundation
 
 protocol NetworkServiceProtocol {
     func fetchNews(completion: @escaping(Result<[News], Error>) -> Void)
+    func bindSection(_ text: String)
 }

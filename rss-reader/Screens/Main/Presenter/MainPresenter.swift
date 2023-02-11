@@ -61,4 +61,12 @@ class MainPresenter: MainPresenterProtocol {
         let news = userDefaults.stringArray(forKey: MainPresenter.key)
         return news ?? []
     }
+    
+    func changeNewsSection(_ newsSection: NewsSection) {
+        networkService.bindSection(newsSection.rawValue)
+        self.view?.startIndicator()
+        DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(1)) {
+            self.fetchNews()
+        }
+    }
 }
