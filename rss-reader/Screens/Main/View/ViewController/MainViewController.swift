@@ -199,6 +199,8 @@ extension MainViewController: MainViewProtocol {
     }
 }
 
+//MARK: - extension NewsSectionCellProtocol
+
 extension MainViewController: NewsSectionCellProtocol {
     func newsSectionTap(_ newsSection: NewsSection) {
         presenter?.changeNewsSection(newsSection)

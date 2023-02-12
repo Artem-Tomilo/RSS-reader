@@ -41,6 +41,9 @@ class NewsSectionCell: UICollectionViewCell {
             make.edges.equalToSuperview()
         }
         collectionView.register(NewsSectionItemCell.self, forCellWithReuseIdentifier: NewsSectionItemCell.cellIdetntifier)
+        
+        let indexPathForFirstRow = IndexPath(row: 0, section: 0)
+        collectionView.selectItem(at: indexPathForFirstRow, animated: true, scrollPosition: [])
     }
 }
 
